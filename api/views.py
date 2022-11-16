@@ -16,3 +16,9 @@ def resItem(req):
   #   return Response(serializer.data)
   return Response(req.data)
 
+@api_view (['POST'])
+def saveItem(req):
+  serializer = ItemSerializer(data=req.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
