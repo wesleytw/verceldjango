@@ -13,7 +13,20 @@ from rest_framework.response import Response
 
 
 class Prediction(APIView):
-    def post(self, request):
+    def get(self, request):  # get, post...
+        #data = request.data
+        age = request.GET.get('age')
+        gender = request.GET.get('gender')
+        bp = request.GET.get('bp')
+        cholesterol = request.GET.get('cholesterol')
+        salt = request.GET.get('salt')
+        dtree = ApiConfig.model
+        # predict using independent variables
+        PredictionMade = dtree.predict([[age, gender, cholesterol, bp, salt]])
+        response_dict = {"Predicted drug": PredictionMade}
+        print(response_dict)
+        return Response(response_dict, status=200)
+    def post(self, request):  # get, post...
         #data = request.data
         age = request.GET.get('age')
         gender = request.GET.get('gender')

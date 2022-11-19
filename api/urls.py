@@ -7,5 +7,5 @@ urlpatterns = [
     path('/save', saveItem),
     path('/call', callItem),
     path('/ml', ml),
-    path('', Prediction.as_view(), name='prediction'),
+    path('', Prediction.as_view(), name='predict'),
 ]
