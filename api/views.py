@@ -36,7 +36,7 @@ class Prediction(APIView):
         body_data = json.loads(body_unicode)
         print("RRRRRrequest",request,"bo",body_data['age'])
         #data = request.data
-        if (request.GET.get('age')):
+        if (request.GET.get('cholesterol')):
             age = request.GET.get('age')
             gender = request.GET.get('gender')
             bp = request.GET.get('bp')
@@ -57,8 +57,9 @@ class Prediction(APIView):
         else:
             dtree = ApiConfig.model
         # predict using independent variables
+        print([age, gender, cholesterol, bp, salt])
         PredictionMade = dtree.predict([[age, gender, cholesterol, bp, salt]])
-        response_dict = {"Model":model,"salt": salt, "Predicted drug": PredictionMade}
+        response_dict = {"Model":model, "Predicted drug": PredictionMade}
         print(response_dict)
         return Response(response_dict, status=200)
 
